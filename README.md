@@ -1,2 +1,3 @@
-# videojs-bookmark
-Video.js plugin for supporting bookmarking
+# videojs-resumecard
+
+Video.js plugin for resuming playback.
