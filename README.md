@@ -128,6 +128,8 @@ In seconds.
 ## Contributing + Example
 
 ```bash
+npm install -g grunt-cli # only needed for contributing
+
 npm install
 
 npm start
