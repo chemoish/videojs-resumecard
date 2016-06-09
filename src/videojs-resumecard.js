@@ -22,6 +22,14 @@ class ResumeCard {
     resumeCard = null;
   }
 
+  fade() {
+    if (resumeCard instanceof HTMLElement === false) {
+      return;
+    }
+
+    resumeCard.style.opacity = 0;
+  }
+
   getRestartButton(callback) {
     const {
       classNameButton,
@@ -159,10 +167,10 @@ class ResumeCard {
     }
 
     this.player.ready(() => {
+      this.hide();
+
       this.player.play();
     });
-
-    this.hide();
 
     return undefined;
   }
@@ -179,13 +187,15 @@ class ResumeCard {
 
     this.player.ready(() => {
       this.player.one('seeked', () => {
+        this.hide();
+
         this.player.play();
       });
 
       this.player.currentTime(time);
-    });
 
-    this.hide();
+      this.fade();
+    });
 
     return undefined;
   }
