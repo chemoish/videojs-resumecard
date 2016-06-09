@@ -1,8 +1,8 @@
 {
   "name": "videojs-resumecard",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Video.js plugin for resuming playback.",
-  "main": "index.js",
+  "main": "src/videojs-resumecard",
   "scripts": {
     "build": "npm run build:production && npm run build:development",
     "build:development": "webpack --config webpack/webpack.config",
