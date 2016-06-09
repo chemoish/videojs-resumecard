@@ -1,5 +1,8 @@
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const moment = require('moment');
+const pkg = require('../package.json');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -48,6 +51,17 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.BannerPlugin([
+      '/**',
+      ` * ${pkg.name} v${pkg.version}`,
+      ' * ',
+      ` * @author: ${pkg.author}`,
+      ` * @date: ${moment().format('YYYY-MM-DD')}`,
+      ' */',
+      '',
+    ].join('\n'), {
+      raw: true,
+    }),
     new ExtractTextPlugin('[name].css', {
       allChunks: true,
     }),
