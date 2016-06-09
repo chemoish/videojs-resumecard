@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 
-import styles from './videojs-resumecard.scss';
+import './videojs-resumecard.scss';
 
 let resumeCard = null;
 
@@ -8,12 +8,12 @@ class ResumeCard {
   constructor(player, options) {
     this.player = player;
     this.settings = videojs.mergeOptions({
-      className: styles['vjs-resume-card'],
-      classNameActionItem: styles['vjs-resume-card-action-item'],
-      classNameActionList: styles['vjs-resume-card-action-list'],
-      classNameButton: styles['vjs-resume-card-button'],
-      classNameRestartButton: styles['vjs-resume-card-restart-button'],
-      classNameResumeButton: styles['vjs-resume-card-resume-button'],
+      className: 'vjs-resume-card',
+      classNameActionItem: 'vjs-resume-card-action-item',
+      classNameActionList: 'vjs-resume-card-action-list',
+      classNameButton: 'vjs-resume-card-button',
+      classNameRestartButton: 'vjs-resume-card-restart-button',
+      classNameResumeButton: 'vjs-resume-card-resume-button',
       id: 'vjs_resume_card',
       restartButtonText: 'Restart Video',
       resumeButtonText: 'Resume Video',
