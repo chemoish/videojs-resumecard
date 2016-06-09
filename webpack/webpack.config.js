@@ -1,10 +1,13 @@
+const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
   entry: {
-    src: './src/videojs-resumecard',
+    'videojs.resumecard': './src/videojs-resumecard',
   },
 
   output: {
-    filename: 'videojs.resumecard.js',
+    filename: '[name].js',
     libraryTarget: 'umd',
     path: 'dist',
   },
@@ -16,9 +19,7 @@ module.exports = {
       test: /\.js$/,
     }],
 
-    loaders: [],
-
-    postLoaders: [{
+    loaders: [{
       exclude: /node_modules/,
       loader: 'babel',
       test: /.js$/,
@@ -34,9 +35,29 @@ module.exports = {
         ],
       },
     }],
+
+    postLoaders: [{
+      include: /src/,
+      loader: ExtractTextPlugin.extract('style', [
+        'css?module&importLoaders=2',
+        'postcss',
+        'sass',
+      ].join('!')),
+      test: /\.scss$/,
+    }],
   },
 
-  plugins: [],
+  plugins: [
+    new ExtractTextPlugin('[name].css', {
+      allChunks: true,
+    }),
+  ],
+
+  postcss() {
+    return [
+      autoprefixer,
+    ];
+  },
 
   externals: {
     'video.js': 'videojs',

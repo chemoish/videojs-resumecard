@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" height="250" width="600" controls>
+  <video id="player" class="video-js vjs-default-skin" height="250" width="600" controls>
     <source src="http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4" type="video/mp4" />
 
     <p class="vjs-no-js">
@@ -28,8 +28,12 @@
   <script src="videojs.resumecard.js"></script>
 
   <script>
-  videojs('player').ready(function () {
-    this.resumecard();
+  videojs('player', {
+    bigPlayButton: false,
+  }).ready(function () {
+    this.resumecard({
+      seconds: 42,
+    });
   });
   </script>
 </body>
