@@ -170,6 +170,7 @@ class ResumeCard {
   resumeCallback(event) {
     const {
       resumeCallback,
+      time,
     } = this.settings;
 
     if (typeof resumeCallback === 'function') {
@@ -181,7 +182,7 @@ class ResumeCard {
         this.player.play();
       });
 
-      this.player.currentTime(this.settings.seconds);
+      this.player.currentTime(time);
     });
 
     this.hide();
