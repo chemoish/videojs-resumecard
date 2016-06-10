@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+
 module.exports = function Gruntfile(grunt) {
   // load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
