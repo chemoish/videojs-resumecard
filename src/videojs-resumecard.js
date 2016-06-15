@@ -39,6 +39,10 @@ let resumeCard = null;
  */
 class ResumeCard {
   constructor(player, options = {}) {
+    if (!options.time) {
+      throw new Error('videojs-resumecard requires a resume time.');
+    }
+
     this.player = player;
     this.settings = videojs.mergeOptions({
       className: 'vjs-resume-card',
