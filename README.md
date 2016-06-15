@@ -26,32 +26,32 @@ videojs('player_id').resumecard({
 
 #### className
 
-Type: `String`  
+Type: `string`  
 Default: `vjs-resume-card`  
 
 #### classNameActionItem
 
-Type: `String`  
+Type: `string`  
 Default: `vjs-resume-card-action-item`  
 
 #### classNameActionList
 
-Type: `String`  
+Type: `string`  
 Default: `vjs-resume-card-action-list`  
 
 #### classNameButton
 
-Type: `String`  
+Type: `string`  
 Default: `vjs-resume-card-button`  
 
 #### classNameRestartButton
 
-Type: `String`  
+Type: `string`  
 Default: `vjs-resume-card-restart-button`  
 
 #### classNameResumeButton
 
-Type: `String`  
+Type: `string`  
 Default: `vjs-resume-card-resume-button`  
 
 #### getRestartButton
@@ -94,12 +94,12 @@ Enables HTML customization for the template. **MUST return DOM Element**.
 
 #### id
 
-Type: `String`  
+Type: `string`  
 Default: `vjs_resume_card`  
 
 #### restartButtonText
 
-Type: `String`  
+Type: `string`  
 Default: `Restart Video`  
 
 #### restartCallback
@@ -110,7 +110,7 @@ Enables customization for the restart event.
 
 #### resumeButtonText
 
-Type: `String`  
+Type: `string`  
 Default: `Resume Video`  
 
 #### resumeCallback
@@ -121,7 +121,7 @@ Enables customization for the resume event.
 
 #### time
 
-Type: `Number`  
+Type: `number`  
 
 In seconds.
 

@@ -22,23 +22,23 @@ let resumeCard = null;
  *
  * @param {Object} player VideoJS player
  * @param {Object} options={}
- * @param {number} options.time Start time, in seconds, for the contented to be resumed.
- * @param {Object} [options.className=vjs-resume-card] HTMLElement class
- * @param {Object} [options.classNameActionItem=vjs-resume-card-action-item] HTMLElement class
- * @param {Object} [options.classNameActionList=vjs-resume-card-action-list] HTMLElement class
- * @param {Object} [options.classNameButton=vjs-resume-card-button] HTMLElement class
- * @param {Object} [options.classNameRestartButton=vjs-resume-card-restart-button] HTMLElement class
- * @param {Object} [options.classNameResumeButton=vjs-resume-card-resume-button] HTMLElement class
- * @param {Object} [options.id=vjs_resume_card] HTMLElement id
- * @param {Object} [options.restartButtonText=Restart Video]
- * @param {Object} [options.resumeButtonText=Resume Video]
+ * @param {string} [options.className=vjs-resume-card] HTMLElement class
+ * @param {string} [options.classNameActionItem=vjs-resume-card-action-item] HTMLElement class
+ * @param {string} [options.classNameActionList=vjs-resume-card-action-list] HTMLElement class
+ * @param {string} [options.classNameButton=vjs-resume-card-button] HTMLElement class
+ * @param {string} [options.classNameRestartButton=vjs-resume-card-restart-button] HTMLElement class
+ * @param {string} [options.classNameResumeButton=vjs-resume-card-resume-button] HTMLElement class
  * @param {getRestartButton} [options.getRestartButton] Callback to return custom restart
  * button HTMLElement.
  * @param {getResumeButton} [options.getResumeButton] Callabck to return custom resume
  * button HTMLElement.
  * @param {getTemplate} [options.getTemplate] Callback to return custom template HTMLElement.
+ * @param {string} [options.id=vjs_resume_card] HTMLElement id
+ * @param {string} [options.restartButtonText=Restart Video]
  * @param {restartCallback} [options.restartCallback] Custom restart button callback.
+ * @param {string} [options.resumeButtonText=Resume Video]
  * @param {resumeCallback} [options.resumeCallback] Custom resume button callback.
+ * @param {number} options.time Start time, in seconds, for the contented to be resumed.
  */
 class ResumeCard {
   constructor(player, options = {}) {
