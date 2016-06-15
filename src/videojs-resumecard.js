@@ -43,6 +43,10 @@ class ResumeCard {
       throw new Error('videojs-resumecard requires a resume time.');
     }
 
+    if (player.bigPlayButton) {
+      player.bigPlayButton.hide();
+    }
+
     this.player = player;
     this.settings = videojs.mergeOptions({
       className: 'vjs-resume-card',
