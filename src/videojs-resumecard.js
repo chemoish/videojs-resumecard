@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+/* global videojs */
 
 import './videojs-resumecard.scss';
 
