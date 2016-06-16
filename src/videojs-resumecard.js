@@ -1,4 +1,5 @@
 /* global videojs */
+/* eslint-disable max-len */
 
 import './videojs-resumecard.scss';
 
@@ -28,16 +29,14 @@ let resumeCard = null;
  * @param {string} [options.classNameButton=vjs-resume-card-button] HTMLElement class
  * @param {string} [options.classNameRestartButton=vjs-resume-card-restart-button] HTMLElement class
  * @param {string} [options.classNameResumeButton=vjs-resume-card-resume-button] HTMLElement class
- * @param {getRestartButton} [options.getRestartButton] Callback to return custom restart
- * button HTMLElement.
- * @param {getResumeButton} [options.getResumeButton] Callabck to return custom resume
- * button HTMLElement.
- * @param {getTemplate} [options.getTemplate] Callback to return custom template HTMLElement.
+ * @param {function(restartCallback):HTMLElement} [options.getRestartButton] Callback to return custom restart button HTMLElement.
+ * @param {function(resumeCallback):HTMLElement} [options.getResumeButton] Callback to return custom resume button HTMLElement.
+ * @param {function(restartButton:HTMLElement, resumeButton:HTMLElement):HTMLElement} [options.getTemplate] Callback to return custom template HTMLElement.
  * @param {string} [options.id=vjs_resume_card] HTMLElement id
  * @param {string} [options.restartButtonText=Restart Video]
- * @param {restartCallback} [options.restartCallback] Custom restart button callback.
+ * @param {function(event)} [options.restartCallback] Custom restart button callback.
  * @param {string} [options.resumeButtonText=Resume Video]
- * @param {resumeCallback} [options.resumeCallback] Custom resume button callback.
+ * @param {function(event)} [options.resumeCallback] Custom resume button callback.
  * @param {number} options.time Start time, in seconds, for the contented to be resumed.
  */
 class ResumeCard {
@@ -77,7 +76,6 @@ class ResumeCard {
   /**
    * Generates a restart button.
    *
-   * @callback getRestartButton
    * @param {restartCallback} callback
    * @returns {HTMLElement} restartButton
    */
@@ -115,7 +113,6 @@ class ResumeCard {
   /**
    * Generates a resume button.
    *
-   * @callback getResumeButton
    * @param {resumeCallback} callback
    * @returns {HTMLElement} resumeButton
    */
@@ -153,7 +150,6 @@ class ResumeCard {
   /**
    * Generates the resume card template.
    *
-   * @callback getTemplate
    * @param {HTMLElement} restartButton
    * @param {HTMLElement} resumeButton
    * @returns {HTMLElement} template
@@ -226,7 +222,6 @@ class ResumeCard {
   /**
    * Executes the callback on restartButton interaction.
    *
-   * @callback restartCallback
    * @param {Object} event
    */
   restartCallback(event) {
@@ -250,7 +245,6 @@ class ResumeCard {
   /**
    * Executes the callback on resumeButton interaction.
    *
-   * @callback resumeCallback
    * @param {Object} event
    */
   resumeCallback(event) {

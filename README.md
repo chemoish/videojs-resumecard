@@ -56,7 +56,7 @@ Default: `vjs-resume-card-resume-button`
 
 #### getRestartButton
 
-Type: `getRestartButton(restartCallback)`  
+Type: `function(restartCallback):HTMLElement`  
 Default:
 
 ```html
@@ -67,7 +67,7 @@ Enables HTML customization for the restart button. **MUST return DOM Element**.
 
 #### getResumeButton
 
-Type: `getResumeButton(resumeCallback)`  
+Type: `function(resumeCallback):HTMLElement`  
 Default:
 
 ```html
@@ -78,7 +78,7 @@ Enables HTML customization for the resume button. **MUST return DOM Element**.
 
 #### getTemplate
 
-Type: `getTemplate(restartButton, resumeButton)`  
+Type: `function(restartButton:HTMLElement, resumeButton:HTMLElement):HTMLElement`  
 Default:
 
 ```html
@@ -104,7 +104,7 @@ Default: `Restart Video`
 
 #### restartCallback
 
-Type: `restartCallback(event)`  
+Type: `function(event)`  
 
 Enables customization for the restart event.
 
@@ -115,7 +115,7 @@ Default: `Resume Video`
 
 #### resumeCallback
 
-Type: `resumeCallback(event)`  
+Type: `function(event)`  
 
 Enables customization for the resume event.
 
