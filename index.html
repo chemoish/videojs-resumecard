@@ -28,11 +28,30 @@
   <script src="videojs.resumecard.js"></script>
 
   <script>
-    videojs('player', {
+    var player = videojs('player', {
       bigPlayButton: false,
     }).ready(function () {
       this.resumecard({
         time: 42,
+
+        template(restartCallback, resumeCallback) {
+          var template = document.createElement('div');
+
+          var restartButton = document.createElement('button');
+          restartButton.type = 'button';
+          restartButton.innerText = 'Restart Video';
+          restartButton.onclick = restartCallback;
+
+          var resumeButton = document.createElement('button');
+          resumeButton.type = 'button';
+          resumeButton.innerText = 'Resume Video';
+          resumeButton.onclick = resumeCallback;
+
+          template.appendChild(restartButton);
+          template.appendChild(resumeButton);
+
+          return template;
+        }
       });
     });
   </script>

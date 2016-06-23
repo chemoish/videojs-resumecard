@@ -24,100 +24,44 @@ videojs('player_id').resumecard({
 
 ## Options
 
-#### className
+#### [className]
 
 Type: `string`  
-Default: `vjs-resume-card`  
+Default: `vjs-resumecard`  
 
-#### classNameActionItem
+HTMLElement class.
 
-Type: `string`  
-Default: `vjs-resume-card-action-item`  
-
-#### classNameActionList
+#### [id]
 
 Type: `string`  
-Default: `vjs-resume-card-action-list`  
+Default: `vjs_resumecard`  
 
-#### classNameButton
+HTMLElement id.
 
-Type: `string`  
-Default: `vjs-resume-card-button`  
+#### [preload]
 
-#### classNameRestartButton
+Type: `boolean`
+Default: `false`
 
-Type: `string`  
-Default: `vjs-resume-card-restart-button`  
+Have the player *immediately* seek to time specified.
 
-#### classNameResumeButton
-
-Type: `string`  
-Default: `vjs-resume-card-resume-button`  
-
-#### getRestartButton
-
-Type: `function(restartCallback):HTMLElement`  
-Default:
-
-```html
-<button class="vjs-resume-card-button vjs-resume-card-restart-button" type="button">Restart Video</button>
-```
-
-Enables HTML customization for the restart button. **MUST return DOM Element**.
-
-#### getResumeButton
-
-Type: `function(resumeCallback):HTMLElement`  
-Default:
-
-```html
-<button class="vjs-resume-card-button vjs-resume-card-resume-button" type="button">Resume Video</button>
-```
-
-Enables HTML customization for the resume button. **MUST return DOM Element**.
-
-#### getTemplate
-
-Type: `function(restartButton:HTMLElement, resumeButton:HTMLElement):HTMLElement`  
-Default:
-
-```html
-<div class="vjs-resume-card" id="vjs_resume_card">
-  <ul class="vjs-resume-card-action-list">
-    <li class="vjs-resume-card-action-item">{{restartButton}}</li>
-    <li class="vjs-resume-card-action-item">{{resumeButton}}</li>
-  </ul>
-</div>
-```
-
-Enables HTML customization for the template. **MUST return DOM Element**.
-
-#### id
-
-Type: `string`  
-Default: `vjs_resume_card`  
-
-#### restartButtonText
-
-Type: `string`  
-Default: `Restart Video`  
-
-#### restartCallback
+#### [restartCallback]
 
 Type: `function(event)`  
 
 Enables customization for the restart event.
 
-#### resumeButtonText
-
-Type: `string`  
-Default: `Resume Video`  
-
-#### resumeCallback
+#### [resumeCallback]
 
 Type: `function(event)`  
 
 Enables customization for the resume event.
+
+#### template
+
+Type: `function(restartCallback, resumeCallback):HTMLElement`  
+
+Enables HTML customization for the template. **MUST return DOM Element**.
 
 #### time
 
