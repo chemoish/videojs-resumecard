@@ -1,6 +1,6 @@
 /// @name VideoJS Resume Card
 
-:global(.vjs-resume-card)
+:global(.vjs-resumecard)
 {
   background-color: #000;
   bottom: 0;
@@ -11,53 +11,4 @@
   right: 0;
   top: 0;
   z-index: 1;
-}
-
-/// @name VideoJS Resume Card Action List
-
-:global(.vjs-resume-card-action-list)
-{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/// @name VideoJS Resume Card Action Item
-
-:global(.vjs-resume-card-action-item)
-{
-  display: inline-block;
-  margin-left: 5px;
-  margin-right: 5px;
-
-  &:first-child
-  {
-    margin-left: 0;
-  }
-
-  &:last-child
-  {
-    margin-right: 0;
-  }
-}
-
-/// @name VideoJS Resume Card Button
-
-:global(.vjs-resume-card-button)
-{
-  padding: 10px 15px;
-}
-
-/// @name VideoJS Resume Card Restart Button
-
-:global(.vjs-resume-card-restart-button)
-{
-
-}
-
-/// @name VideoJS Resume Card Resume Button
-
-:global(.vjs-resume-card-resume-button)
-{
-
 }

@@ -13,6 +13,10 @@ let resumeCard = null;
  *   plugins: {
  *     resumecard: {
  *       time: 42,
+ *
+ *       template: function template() {
+ *         // ...
+ *       }
  *     },
  *   },
  * });
@@ -23,44 +27,42 @@ let resumeCard = null;
  *
  * @param {Object} player VideoJS player
  * @param {Object} options={}
- * @param {string} [options.className=vjs-resume-card] HTMLElement class
- * @param {string} [options.classNameActionItem=vjs-resume-card-action-item] HTMLElement class
- * @param {string} [options.classNameActionList=vjs-resume-card-action-list] HTMLElement class
- * @param {string} [options.classNameButton=vjs-resume-card-button] HTMLElement class
- * @param {string} [options.classNameRestartButton=vjs-resume-card-restart-button] HTMLElement class
- * @param {string} [options.classNameResumeButton=vjs-resume-card-resume-button] HTMLElement class
- * @param {function(restartCallback):HTMLElement} [options.getRestartButton] Callback to return custom restart button HTMLElement.
- * @param {function(resumeCallback):HTMLElement} [options.getResumeButton] Callback to return custom resume button HTMLElement.
- * @param {function(restartButton:HTMLElement, resumeButton:HTMLElement):HTMLElement} [options.getTemplate] Callback to return custom template HTMLElement.
- * @param {string} [options.id=vjs_resume_card] HTMLElement id
- * @param {string} [options.restartButtonText=Restart Video]
+ * @param {string} [options.className=vjs-resumecard] HTMLElement class.
+ * @param {string} [options.id=vjs_resumecard] HTMLElement id.
+ * @param {boolean} [options.preload] Have the player *immediately* seek to time specified.
  * @param {function(event)} [options.restartCallback] Custom restart button callback.
- * @param {string} [options.resumeButtonText=Resume Video]
  * @param {function(event)} [options.resumeCallback] Custom resume button callback.
+ * @param {function(restartCallback, resumeCallback):HTMLElement} options.template Callback to return custom template HTMLElement.
  * @param {number} options.time Start time, in seconds, for the contented to be resumed.
  */
 class ResumeCard {
   constructor(player, options = {}) {
     if (!options.time) {
-      throw new Error('videojs-resumecard requires a resume time.');
+      throw new Error('videojs-resumecard requires a valid time.');
     }
 
+    if (!options.template) {
+      throw new Error('videojs-resumecard requires a valid template.');
+    }
+
+    // hide big play button since resume card will take over initial play experience
     if (player.bigPlayButton) {
       player.bigPlayButton.hide();
     }
 
+    // seek immediately on preload
+    if (options.preload === true) {
+      player.currentTime(options.time);
+    }
+
     this.player = player;
     this.settings = videojs.mergeOptions({
-      className: 'vjs-resume-card',
-      classNameActionItem: 'vjs-resume-card-action-item',
-      classNameActionList: 'vjs-resume-card-action-list',
-      classNameButton: 'vjs-resume-card-button',
-      classNameRestartButton: 'vjs-resume-card-restart-button',
-      classNameResumeButton: 'vjs-resume-card-resume-button',
-      id: 'vjs_resume_card',
-      restartButtonText: 'Restart Video',
-      resumeButtonText: 'Resume Video',
+      className: 'vjs-resumecard',
+      id: 'vjs_resumecard',
     }, options);
+
+    this.restartCallback = this.restartCallback.bind(this);
+    this.resumeCallback = this.resumeCallback.bind(this);
 
     resumeCard = null;
   }
@@ -73,133 +75,6 @@ class ResumeCard {
     resumeCard.style.opacity = 0;
   }
 
-  /**
-   * Generates a restart button.
-   *
-   * @param {restartCallback} callback
-   * @returns {HTMLElement} restartButton
-   */
-  getRestartButton(callback) {
-    const {
-      classNameButton,
-      classNameRestartButton,
-      getRestartButton,
-      restartButtonText,
-    } = this.settings;
-
-    let restartButton;
-
-    if (typeof getRestartButton === 'function') {
-      restartButton = getRestartButton.call(this, callback);
-
-      if (restartButton instanceof HTMLElement) {
-        return restartButton;
-      }
-    }
-
-    restartButton = document.createElement('button');
-
-    restartButton.className = [
-      classNameButton,
-      classNameRestartButton,
-    ].join(' ');
-    restartButton.innerText = restartButtonText;
-    restartButton.onclick = callback;
-    restartButton.type = 'button';
-
-    return restartButton;
-  }
-
-  /**
-   * Generates a resume button.
-   *
-   * @param {resumeCallback} callback
-   * @returns {HTMLElement} resumeButton
-   */
-  getResumeButton(callback) {
-    const {
-      classNameButton,
-      classNameResumeButton,
-      getResumeButton,
-      resumeButtonText,
-    } = this.settings;
-
-    let resumeButton;
-
-    if (typeof getResumeButton === 'function') {
-      resumeButton = getResumeButton.call(this, callback);
-
-      if (resumeButton instanceof HTMLElement) {
-        return resumeButton;
-      }
-    }
-
-    resumeButton = document.createElement('button');
-
-    resumeButton.className = [
-      classNameButton,
-      classNameResumeButton,
-    ].join(' ');
-    resumeButton.innerText = resumeButtonText;
-    resumeButton.onclick = callback;
-    resumeButton.type = 'button';
-
-    return resumeButton;
-  }
-
-  /**
-   * Generates the resume card template.
-   *
-   * @param {HTMLElement} restartButton
-   * @param {HTMLElement} resumeButton
-   * @returns {HTMLElement} template
-   */
-  getTemplate(restartButton, resumeButton) {
-    const {
-      className,
-      classNameActionItem,
-      classNameActionList,
-      getTemplate,
-      id,
-    } = this.settings;
-
-    let template;
-
-    if (typeof getTemplate === 'function') {
-      template = getTemplate.apply(this, [restartButton, resumeButton]);
-
-      if (template instanceof HTMLElement) {
-        return template;
-      }
-    }
-
-    template = document.createElement('div');
-
-    template.className = className;
-    template.id = id;
-
-    const actionList = document.createElement('ul');
-
-    actionList.className = classNameActionList;
-
-    const actionItemRestart = document.createElement('li');
-
-    actionItemRestart.className = classNameActionItem;
-    actionItemRestart.appendChild(restartButton);
-
-    const actionItemResume = document.createElement('li');
-
-    actionItemResume.className = classNameActionItem;
-    actionItemResume.appendChild(resumeButton);
-
-    actionList.appendChild(actionItemRestart);
-    actionList.appendChild(actionItemResume);
-
-    template.appendChild(actionList);
-
-    return template;
-  }
-
   hide() {
     if (resumeCard instanceof HTMLElement === false) {
       return;
@@ -209,10 +84,30 @@ class ResumeCard {
   }
 
   render() {
-    const restartButton = this.getRestartButton(this.restartCallback.bind(this));
-    const resumeButton = this.getResumeButton(this.resumeCallback.bind(this));
+    const {
+      className,
+      id,
+      template,
+    } = this.settings;
 
-    resumeCard = this.getTemplate(restartButton, resumeButton);
+    resumeCard = document.createElement('div');
+    resumeCard.className = className;
+    resumeCard.id = id;
+
+    if (typeof template !== 'function') {
+      this.player.el().appendChild(resumeCard);
+    }
+
+    const resumeCardTemplate = template(
+      this.restartCallback,
+      this.resumeCallback
+    );
+
+    if (resumeCardTemplate instanceof HTMLElement === false) {
+      throw new Error('videojs-resumecard requires template to be a valid HTMLElement.');
+    }
+
+    resumeCard.appendChild(resumeCardTemplate);
 
     this.player.el().appendChild(resumeCard);
 
@@ -234,9 +129,16 @@ class ResumeCard {
     }
 
     this.player.ready(() => {
-      this.hide();
+      this.player.one('seeked', () => {
+        this.hide();
 
-      this.player.play();
+        this.player.play();
+      });
+
+      this.player.currentTime(0);
+
+      // visually hide resumecard, but prevent player interaction while video loads.
+      this.fade();
     });
 
     return undefined;
