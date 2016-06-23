@@ -61,6 +61,9 @@ class ResumeCard {
       id: 'vjs_resumecard',
     }, options);
 
+    this.restartCallback = this.restartCallback.bind(this);
+    this.resumeCallback = this.resumeCallback.bind(this);
+
     resumeCard = null;
   }
 
@@ -96,8 +99,8 @@ class ResumeCard {
     }
 
     const resumeCardTemplate = template(
-      this.restartCallback.bind(this),
-      this.resumeCallback.bind(this)
+      this.restartCallback,
+      this.resumeCallback
     );
 
     if (resumeCardTemplate instanceof HTMLElement === false) {
