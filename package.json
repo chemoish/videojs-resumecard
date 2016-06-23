@@ -1,6 +1,6 @@
 {
   "name": "videojs-resumecard",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Video.js plugin for resuming playback.",
   "main": "src/videojs-resumecard",
   "scripts": {
