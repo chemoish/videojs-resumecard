@@ -37,8 +37,15 @@ let resumeCard = null;
  */
 class ResumeCard {
   constructor(player, options = {}) {
-    if (!options.time) {
+    const time = parseInt(options.time, 10);
+
+    if (!isFinite(time)) {
       throw new Error('videojs-resumecard requires a valid time.');
+    }
+
+    // if the resume time is *equivalent* to the start value, just noop
+    if (time <= 0) {
+      return;
     }
 
     if (!options.template) {
@@ -70,6 +77,7 @@ class ResumeCard {
       resumeCard = null;
     }
 
+    this.render();
   }
 
   fade() {
@@ -190,7 +198,7 @@ class ResumeCard {
 }
 
 function resumecard(options) {
-  (new ResumeCard(this, options)).render();
+  new ResumeCard(this, options); // eslint-disable-line no-new
 }
 
 videojs.plugin('resumecard', resumecard);
