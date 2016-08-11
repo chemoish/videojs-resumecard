@@ -64,7 +64,12 @@ class ResumeCard {
     this.restartCallback = this.restartCallback.bind(this);
     this.resumeCallback = this.resumeCallback.bind(this);
 
-    resumeCard = null;
+    if (resumeCard instanceof HTMLElement) {
+      this.player.el().removeChild(resumeCard);
+
+      resumeCard = null;
+    }
+
   }
 
   fade() {
