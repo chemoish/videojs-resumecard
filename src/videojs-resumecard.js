@@ -72,12 +72,20 @@ class ResumeCard {
     this.resumeCallback = this.resumeCallback.bind(this);
 
     if (resumeCard instanceof HTMLElement) {
-      this.player.el().removeChild(resumeCard);
-
-      resumeCard = null;
+      this.dispose();
     }
 
+    this.player.on('dispose', () => {
+      this.dispose();
+    });
+
     this.render();
+  }
+
+  dispose() {
+    this.player.el().removeChild(resumeCard);
+
+    resumeCard = null;
   }
 
   fade() {
